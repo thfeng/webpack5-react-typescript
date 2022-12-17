@@ -1,0 +1,20 @@
+{
+  "singleQuote": true,
+  "trailingComma": "all",
+  "printWidth": 120,
+  "proseWrap": "never",
+  "endOfLine": "lf",
+  "overrides": [{
+      "files": ".prettierrc",
+      "options": {
+        "parser": "flow"
+      }
+    },
+    {
+      "files": ["*.html", "*.ejs"],
+      "options": {
+        "parser": "html"
+      }
+    }
+  ]
+}

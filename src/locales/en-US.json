@@ -1,0 +1,3 @@
+{
+  "page.home.today": "Today is {ts, date, ::yyyyMMdd}"
+}

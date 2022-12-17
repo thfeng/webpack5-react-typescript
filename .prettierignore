@@ -1,0 +1,22 @@
+# Ignore artifacts:
+**/*.svg
+*.png
+package.json
+*.lock
+yarn-error.log
+.dockerignore
+.DS_Store
+.eslintignore
+*.toml
+docker
+.editorconfig
+Dockerfile*
+.gitignore
+.prettierignore
+LICENSE
+.eslintcache
+.history
+CNAME
+/dist
+/build
+/public

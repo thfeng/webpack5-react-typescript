@@ -1,0 +1,3 @@
+{
+  "page.home.today": "今天是 {ts, date, ::yyyyMMdd}"
+}
