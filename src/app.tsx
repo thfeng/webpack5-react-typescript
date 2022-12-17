@@ -10,7 +10,7 @@ import './app.less';
 const App = () => {
   return (
     <IntlProvider messages={Messages} locale="zh-CN" defaultLocale="en-US">
-      <h1>Webpack 5 for React.js in Typescript</h1>
+      <h1>Webpack5 for React in Typescript</h1>
       <BrowserRouter>
         <nav>
           <Link to="/about">View About</Link>
