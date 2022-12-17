@@ -6,7 +6,9 @@
   "scripts": {
     "start": "webpack serve --config scripts/webpack.config.dev.ts",
     "build": "webpack --config scripts/webpack.config.prod.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install",
+    "postinstall": "husky install"
   },
   "repository": {
     "type": "git",
