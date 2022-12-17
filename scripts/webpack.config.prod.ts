@@ -5,6 +5,9 @@ import BaseConfig from './webpack.config.base';
 
 const config: Configuration = {
   mode: 'production',
+  output: {
+    publicPath: '/',
+  },
   plugins: BaseConfig.plugins?.concat([new CleanWebpackPlugin()]),
 };
 
