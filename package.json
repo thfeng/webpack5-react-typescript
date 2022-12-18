@@ -6,11 +6,11 @@
   "scripts": {
     "start": "webpack serve --config scripts/webpack.config.dev.ts",
     "build": "webpack --config scripts/webpack.config.prod.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npx playwright test",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
     "lint-staged": "lint-staged",
-    "postinstall": "husky install && husky add .husky/pre-commit 'npm run lint-staged'"
+    "postinstall": "husky install"
   },
   "lint-staged": {
     "**/*.less": "npm run lint:style",
@@ -46,6 +46,7 @@
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
     "@babel/runtime": "^7.17.2",
+    "@playwright/test": "^1.29.0",
     "@types/react": "^17.0.40",
     "@types/react-dom": "^17.0.13",
     "@types/react-router-dom": "^5.3.3",
