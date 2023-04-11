@@ -1,3 +1,29 @@
 {
-  "extends": ["stylelint-config-standard", "stylelint-config-prettier"]
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-prettier",
+    "stylelint-config-css-modules",
+    "stylelint-config-recommended",
+    "stylelint-config-recommended-less"
+  ],
+  "overrides": [
+    {
+      "files": ["**/*.{html,vue}"],
+      "customSyntax": "postcss-html"
+    },
+    {
+      "files": ["**/*.less"],
+      "customSyntax": "postcss-less"
+    }
+  ],
+  "plugins": ["stylelint-order"],
+  "rules": {
+    "selector-class-pattern": ".*",
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["global"]
+      }
+    ]
+  }
 }

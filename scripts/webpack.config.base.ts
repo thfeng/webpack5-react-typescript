@@ -19,6 +19,7 @@ const devMode = process.env.NODE_ENV !== 'production';
 
 const cssModule: RuleSetRule = {
   test: /\.css$/i,
+  exclude: /node_modules/,
   use: [
     devMode
       ? 'style-loader'
@@ -36,6 +37,23 @@ const cssModule: RuleSetRule = {
         },
       },
     },
+    'postcss-loader',
+  ],
+};
+
+const cssNodeModulesModule: RuleSetRule = {
+  test: /\.css$/i,
+  include: /node_modules/,
+  use: [
+    devMode
+      ? 'style-loader'
+      : {
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+            publicPath: './',
+          },
+        },
+    'css-loader',
     'postcss-loader',
   ],
 };
@@ -67,6 +85,7 @@ const sassModule: RuleSetRule = {
 
 const lessModule: RuleSetRule = {
   test: /\.less$/i,
+  exclude: /node_modules/,
   use: [
     devMode
       ? 'style-loader'
@@ -89,7 +108,36 @@ const lessModule: RuleSetRule = {
       loader: 'less-loader',
       options: {
         lessOptions: {
+          modifyVars: { '@primary-color': '#1CC855' },
           javascriptEnabled: true,
+          sourceMap: true,
+        },
+      },
+    },
+  ],
+};
+
+const lessNodeModulesModule: RuleSetRule = {
+  test: /\.less$/i,
+  include: /node_modules/,
+  use: [
+    devMode
+      ? 'style-loader'
+      : {
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+            publicPath: './',
+          },
+        },
+    'css-loader',
+    'postcss-loader',
+    {
+      loader: 'less-loader',
+      options: {
+        lessOptions: {
+          modifyVars: { '@primary-color': '#1CC855' },
+          javascriptEnabled: true,
+          sourceMap: true,
         },
       },
     },
@@ -109,15 +157,15 @@ const fontModule = {
 
 const imageModule = {
   test: /\.(png|jpg|jpeg|gif)(\?|$)/i,
-  type: 'asset',
+  type: 'asset/resource',
   parser: {
     dataUrlCondition: {
       maxSize: 30 * 1024,
     },
   },
   generator: {
-    filename: 'img/[name].[hash:6][ext]',
-    publicPath: './',
+    filename: 'images/[name].[hash:6][ext]',
+    publicPath: devMode ? '/' : '/app-content/',
   },
 };
 
@@ -137,9 +185,9 @@ const plugins = [
     config: HtmlTemplateConfig,
     template: path.resolve(__dirname, './template/index.ejs'),
   }),
-
   new ESLintPlugin({
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    quiet: true,
   }),
   new ForkTsCheckerWebpackPlugin({
     async: false,
@@ -149,15 +197,19 @@ const plugins = [
 const config: Configuration = {
   entry: path.resolve(__dirname, '../src/index.ts'),
   output: {
-    path: path.resolve(__dirname, '../dist'),
+    library: 'react-ts-app',
+    libraryTarget: 'umd',
+    path: path.resolve(__dirname, '../build'),
     publicPath: '/',
-    filename: '[name].[contenthash].js',
+    filename: 'js/[name].[contenthash].js',
     assetModuleFilename: 'assets/[name].[hash:6][ext]',
   },
   module: {
     rules: [
       cssModule,
+      cssNodeModulesModule,
       lessModule,
+      lessNodeModulesModule,
       sassModule,
       scriptModule,
       fontModule,
@@ -177,7 +229,7 @@ const config: Configuration = {
     : [
         ...plugins,
         new MiniCssExtractPlugin({
-          filename: '[name]-[contenthash].css',
+          filename: 'styles/[name].[contenthash].css',
         }),
       ],
 };

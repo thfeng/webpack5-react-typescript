@@ -7,10 +7,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title><%= htmlWebpackPlugin.options.config.title %></title>
+  <script>
+    <%= htmlWebpackPlugin.options.config.headScripts %>
+  </script>
 </head>
 
 <body>
   <div id="<%= htmlWebpackPlugin.options.config.rootElementId %>"></div>
+  <script>
+    <%= htmlWebpackPlugin.options.config.bodyScripts %>
+  </script>
 </body>
 
 </html>
